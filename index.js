@@ -4,7 +4,7 @@ const db = require('./data/db');
 
 const server = express();
 
-// Parsae the request from client
+// Parse the request from client
 server.use(express.json());
 
 server.post('/api/users', (req, res) => {
