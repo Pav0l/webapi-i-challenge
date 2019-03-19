@@ -10,9 +10,10 @@ server.use(express.json());
 server.post('/api/users', (req, res) => {
   if (req.body.name && req.body.bio) {
     db.insert(req.body)
-      .then(() => {
+      .then((data) => {
         res.status(201);
-        db.findById(id)
+        // Get back the User object instead of just ID
+        db.findById(data.id)
           .then(newUser => res.json(newUser))
       })
       .catch(() => {
@@ -26,6 +27,7 @@ server.post('/api/users', (req, res) => {
 });
 
 server.get('/api/users', (req, res) => {
+  // this imported method returns a Promise
   db.find()
     .then(users => res.json(users))
     .catch(() => {
